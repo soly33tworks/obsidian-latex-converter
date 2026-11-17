@@ -1,0 +1,2 @@
+# Optional: required by the SVG PDF-dimensions regression test.
+PyMuPDF>=1.23
