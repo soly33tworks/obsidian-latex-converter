@@ -1,6 +1,6 @@
 # Obsidian Markdown to LaTeX
 
-Convert structured Obsidian notes into LaTeX source for theses, papers, and other academic writing. The converter is a standalone Python script: it does not require Pandoc, a particular LaTeX editor, or a custom Obsidian plugin.
+Convert structured Obsidian notes into LaTeX source for theses, papers, and other academic writing. The converter is a standalone Python script: it does not require Pandoc, a particular LaTeX editor, or a custom Obsidian plugin. An optional Notion-to-Obsidian adapter also allows pages exported from Notion to use the same LaTeX conversion workflow.
 
 ![Diagram of the one-click Obsidian-to-LaTeX workflow](assets/workflow.svg)
 
@@ -61,6 +61,32 @@ For a complete compileable example, see **[`demo/`](demo/)**. It contains the Ma
 ![Obsidian command, SVG export, LaTeX paste, and PDF compilation](assets/workflow-demo.gif)
 
 The diagram above is included in the repository. A demonstration GIF can be added to `assets/` after recording an actual Obsidian-to-VS-Code session. See [VISUAL_ASSETS.md](VISUAL_ASSETS.md) for the recording plan.
+
+
+## Notion to Obsidian (optional)
+
+Notion pages can also be used with the existing LaTeX converter. Export a page as **Markdown & CSV** and run the separate [`notion_to_obsidian.py`](notion_to_obsidian.py) adapter. It converts native equation blocks, images and captions, captioned simple tables, numbered references, and page links into the Obsidian conventions understood by the main converter.
+
+![Notion export and conversion into an Obsidian note](assets/notion-obs-workflow.gif)
+
+The adapter accepts Notion's original ZIP filename and extracts it internally. No separate launcher or citation map is required.
+
+```bash
+python3 notion_to_obsidian.py 'original-notion-export.zip' --strict
+```
+
+The output is written to `notion-converted/`, including the converted Markdown notes and image assets in `Chapters/Figures/`.
+
+For bibliography citations, the adapter can retrieve citation keys from a running **Zotero instance with Better BibTeX**, or use an existing Zotero-exported bibliography:
+
+```bash
+python3 notion_to_obsidian.py 'original-notion-export.zip' --bib '/path/to/MAIN.bib' --strict
+```
+
+Unresolved citations generate warnings rather than fabricated keys.
+
+See [NOTION_SETUP.md](NOTION_SETUP.md) for setup instructions, supported content, and limitations. The original Obsidian-to-LaTeX converter remains unchanged.
+
 
 ## Install and use
 
@@ -231,6 +257,9 @@ python -m pip install -r requirements-dev.txt
 | [`assets/compiled-example.png`](assets/compiled-example.png) | Screenshot of the verified demo output |
 | [`requirements-dev.txt`](requirements-dev.txt) | Optional PDF-inspection dependency for the full regression suite |
 | [`examples/`](examples/) | A small, non-private conversion demonstration |
+| [`notion_to_obsidian.py`](notion_to_obsidian.py) | Optional Notion export adapter |
+| [`test_notion_to_obsidian.py`](test_notion_to_obsidian.py) | Regression tests for Notion conversion |
+| [`NOTION_SETUP.md`](NOTION_SETUP.md) | Notion export, citation matching, and conversion instructions |
 
 ## Limitations, forks, and license
 
