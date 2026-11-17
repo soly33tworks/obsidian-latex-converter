@@ -238,4 +238,6 @@ This is an **Obsidian-oriented** Markdown converter, not a full Markdown or Pand
 
 The project is published as-is, without a commitment to merge pull requests or maintain downstream forks. Users are welcome to fork the repository and maintain their own changes. Do not upload a private vault, `.obsidian` or `.pandoc` data folders, plugin caches, or personal machine paths to a public repository.
 
+This project is shared as a stable, independently usable tool. Active development and regular maintenance are not planned, but bug reports, discussions, and contributions are welcome.
+
 Licensed under the **MIT License**, see [LICENSE](LICENSE). **Before publishing**, replace the copyright placeholder in that file with the chosen author or GitHub username.
